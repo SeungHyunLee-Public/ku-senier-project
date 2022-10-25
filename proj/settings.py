@@ -13,11 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import my_settings
 import os
-import django_heroku
 import dj_database_url
 
 db_from_env = dj_database_url.config(conn_max_age=500)
-
 
 
 DATABASES = my_settings.DATABASES
@@ -49,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
-    #'app',
+    # 'app',
     'rangefilter',
     # 'accounts',
 ]
@@ -63,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'proj.urls'
@@ -134,24 +132,54 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# STATIC_URL = '/static/'
+# # STATICFILES_ROOT = (
+# #    os.path.join(BASE_DIR, 'static'),
+# # )
+# # STATICFILES_DIRS = (
+# #     os.path.join(BASE_DIR, 'static'),
+# # )
+STATICFILES_DIRS =[]
+
 STATIC_URL = '/static/'
 # STATICFILES_ROOT = (
 #    os.path.join(BASE_DIR, 'static'),
 # )
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
-
+# --
+# STATIC_URL = '/static/'
+# # STATICFILES_ROOT = (
+# #    os.path.join(BASE_DIR, 'static'),
+# # )
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+# --
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
 
 LOGIN_REDIRECT_URL = '/borrow/'
 LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kkuborrou2022@gmail.com'
+EMAIL_HOST_PASSWORD = 'sgimwelmxyhmynay'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
