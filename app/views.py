@@ -97,11 +97,7 @@ def bui_view(request):
 ##########################################
 
 
-def borrow(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    articles = Article.objects.all()
-    return render(request, 'app/borrow.html', {"articles": articles})
+
 
 
 def bui(request):
@@ -337,11 +333,7 @@ def wish(request):
     return render(request, 'app/wish.html', {"articles": articles})
 
 
-def borrow(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    articles = Article.objects.all().order_by('-ident')
-    return render(request, 'app/borrow.html', {"articles": articles})
+
 
 
 def manage(request):
@@ -401,10 +393,12 @@ def my_contact(request):
    return render(request, 'app/my_contact.html', {"contacts": contacts})
 
 def borrow(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    articles = Article.objects.all().order_by('-ident')
-    return render(request, 'app/borrow.html', {"articles": articles})
+   if not request.user.is_authenticated:
+      return redirect('login')
+   # articles = Article.objects.all().order_by('-ident')
+   # articles=Article.objects.filter(being_rented=request.user.username)
+   articles = Article.objects.filter(exp_date__gte = datetime.now()).order_by('-ident')
+   return render(request, 'app/borrow.html', {"articles":articles})
 
 
 def withdraw(request):

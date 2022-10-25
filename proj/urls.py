@@ -13,7 +13,6 @@ urlpatterns = [
     # path('vis/', ap.vis_view),
     path('bui/', ap.bui_view, name='bui'),
     path('', ap.main_view, name='main'),
-    path('borrow/', ap.borrow, name='borrow'),
     path('contact/', ap.contact, name='contact'),
     path('detail/', ap.detail, name='detail'),
     path('find_id_pwd/', ap.find_id_pwd, name='find_id_pwd'),
@@ -54,7 +53,7 @@ urlpatterns = [
     # path('/', include('django.contrib.auth.urls')),
     # +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # path('borrow_detail/', ap.detail, name="borrow_detail"),
-
+    path('borrow/', ap.borrow, name='borrow'),
 
     # path('login/', ap.LoginView.as_view(), name='login'),
     # path('logout/', ap.LogoutView.as_view(), name='logout'),
